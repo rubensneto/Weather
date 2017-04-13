@@ -12,19 +12,19 @@ import CoreLocation
 struct ForecastService {
     
     let forecastAPIKey: String
-    let forecastBaseURL: NSURL?
+    let forecastBaseURL: URL?
     
     init(APIKey: String){
         self.forecastAPIKey = APIKey
-        self.forecastBaseURL = NSURL(string: "https://api.forecast.io/forecast/\(forecastAPIKey)/")
+        self.forecastBaseURL = URL(string: "https://api.forecast.io/forecast/\(forecastAPIKey)/")
     }
     
-    func getForecast(location: CLLocation, completion: (CurrentWeather? -> Void)){
-        if let forecastURL = NSURL(string: "\(location.coordinate.latitude),\(location.coordinate.longitude)", relativeToURL: forecastBaseURL){
+    func getForecast(_ location: CLLocation, completion: @escaping ((CurrentWeather?) -> Void)){
+        if let forecastURL = URL(string: "\(location.coordinate.latitude),\(location.coordinate.longitude)", relativeTo: forecastBaseURL){
             
             let networkOperation = NetworkOperation(url: forecastURL)
             networkOperation.downloadJSONFromURL{
-                (let JSONDictionary) in
+                (JSONDictionary) in
                 let currentWeather = self.currentWeatherFromJSON(JSONDictionary)
                 completion(currentWeather)
             }
@@ -34,7 +34,7 @@ struct ForecastService {
         }
     }
     
-    func currentWeatherFromJSON(jsonDictionary: [String: AnyObject]?) ->CurrentWeather? {
+    func currentWeatherFromJSON(_ jsonDictionary: [String: AnyObject]?) ->CurrentWeather? {
         if let currentWeatherDictionary = jsonDictionary?["currently"] as? [String: AnyObject]{
             return CurrentWeather(weatherDictionary: currentWeatherDictionary)
         } else {

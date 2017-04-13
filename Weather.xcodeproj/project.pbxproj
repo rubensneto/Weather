@@ -158,9 +158,15 @@
 				TargetAttributes = {
 					D713EBE91D358C89001E3F0C = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 65629Q9C5V;
+						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
 					};
 					D713EC001D358C89001E3F0C = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 65629Q9C5V;
+						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
 						TestTargetID = D713EBE91D358C89001E3F0C;
 					};
 				};
@@ -343,10 +349,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 65629Q9C5V;
 				INFOPLIST_FILE = Weather/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rubensneto.Weather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -354,10 +364,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 65629Q9C5V;
 				INFOPLIST_FILE = Weather/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rubensneto.Weather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -365,10 +379,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 65629Q9C5V;
 				INFOPLIST_FILE = WeatherTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rubensneto.WeatherTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weather.app/Weather";
 			};
 			name = Debug;
@@ -377,10 +395,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 65629Q9C5V;
 				INFOPLIST_FILE = WeatherTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rubensneto.WeatherTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weather.app/Weather";
 			};
 			name = Release;
@@ -404,6 +426,7 @@
 				D713EC0C1D358C89001E3F0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D713EC0D1D358C89001E3F0C /* Build configuration list for PBXNativeTarget "WeatherTests" */ = {
 			isa = XCConfigurationList;
@@ -412,6 +435,7 @@
 				D713EC0F1D358C89001E3F0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

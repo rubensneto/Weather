@@ -52,9 +52,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         mapView.addGestureRecognizer(lpg)
     }
     
-    func longPressAction(longPress: UILongPressGestureRecognizer){
-        let touchedPoint = longPress.locationInView(mapView)
-        let touchedCoordinates = mapView.convertPoint(touchedPoint, toCoordinateFromView: mapView)
+    func longPressAction(_ longPress: UILongPressGestureRecognizer){
+        let touchedPoint = longPress.location(in: mapView)
+        let touchedCoordinates = mapView.convert(touchedPoint, toCoordinateFrom: mapView)
         let center = CLLocationCoordinate2D(latitude: touchedCoordinates.latitude, longitude: touchedCoordinates.longitude)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
         self.mapView.setRegion(region, animated: true)
@@ -65,7 +65,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         getWeatherForCurrentLocation(currentLocation)
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLocation = locations.last!
         let center = CLLocationCoordinate2D(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
@@ -76,7 +76,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         getWeatherForCurrentLocation(currentLocation)
     }
     
-    func getCityName(location: CLLocation){
+    func getCityName(_ location: CLLocation){
         CLGeocoder().reverseGeocodeLocation(location) { (myLocations, error) in
             if error != nil {
                 self.currentCity.text = "Not able to access the server."
@@ -97,14 +97,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
 
-    @IBAction func findMyLocation(sender: UIButton) {
+    @IBAction func findMyLocation(_ sender: UIButton) {
         viewDidLoad()
     }
     
-    func getWeatherForCurrentLocation(location: CLLocation){
-        forecastService.getForecast(location) {(let currently) in
+    func getWeatherForCurrentLocation(_ location: CLLocation){
+        forecastService.getForecast(location) {(currently) in
             if let currentWeather = currently {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     if let temperature = currentWeather.celciusTemperature {
                         self.currentCityTemperature?.text = "\(temperature)"
                         self.changeBackgroundColor(self.screenView, temperature: temperature)
@@ -128,7 +128,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
-    func changeBackgroundColor(view: UIView, temperature: Int) {
+    func changeBackgroundColor(_ view: UIView, temperature: Int) {
         switch temperature {
         case 12..<25:
             view.backgroundColor = UIColor(red: 127/255.0, green: 178/255.0, blue: 240/255.0, alpha: 1.0)
@@ -142,17 +142,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
-        let isFirstOpen = NSUserDefaults.standardUserDefaults().stringForKey("isFirstOpen")
+        let isFirstOpen = UserDefaults.standard.string(forKey: "isFirstOpen")
         
         if isFirstOpen != "no" {
             let alertMessage = "Tap and hold in a place to check out its weather."
             let alertTitle = "Welcome!"
-            let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
-            NSUserDefaults.standardUserDefaults().setObject("no", forKey: "isFirstOpen")
+            let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            UserDefaults.standard.set("no", forKey: "isFirstOpen")
         }
     }
 
@@ -162,12 +162,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         // Dispose of any resources that can be recreated.
     }
 
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Portrait
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.portrait
     }
 }
 
